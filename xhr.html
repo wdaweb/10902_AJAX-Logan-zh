@@ -13,7 +13,7 @@
     <div class="title"></div>
     <h4></h4>
     <ul></ul>
-
+    <div class="footer"></div>
 </body>
 </html>
 <script>
@@ -35,5 +35,32 @@
 
 
     //送出請求
+    let xhr = new XMLHttpRequest;
 
+    xhr.open(
+        'GET',
+        'https://kktix.com/events.json',
+        true
+    );
+
+    xhr.onload=function(){
+        let type=xhr.getResponseHeader('content-type');
+        let status=xhr.status;
+        let response=xhr.responseText;
+        let res=JSON.parse(response);
+        console.log(res);
+        document.querySelector('.title').textContent=res.title;
+        document.querySelector('h4').textContent=res.updated;
+        let events=res.entry;
+        let str='';
+        // events.map((li)=>{
+        // document.querySelector('ul').append(document.createElement('li').append(document.createTextNode(`${li}`)));
+        // })
+        events.forEach(function(event,key){
+            str+=`<li>${event.title}</li>`;
+        })
+            document.querySelector('ul').innerHTML=str;
+    }
+    xhr.send();
+            document.querySelector('.footer').innerHTML='這是頁腳';
     </script>

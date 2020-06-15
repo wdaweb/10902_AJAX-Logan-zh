@@ -30,3 +30,9 @@
     text-align: center;
     font-size:32px;
 }
+.title{
+    text-align:center;
+    font-weight:bolder;
+    border:3px dotted orange;
+    box-shadow:5px 5px 15px black;
+}

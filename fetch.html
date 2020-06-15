@@ -31,5 +31,30 @@
 
 
     //建立錯誤處理
+    fetch('https://kktix.com/events.json',{method:'GET'})
+    .then((res)=>{
+        return res.json();
+    }).then(res=>{
+        console.log(res);
+        // res.entry.map(t=>{
+        //     let li = document.createElement('li');
+        //     let tt =document.createTextNode(t.title);
+        //     li.appendChild(tt);
+        // document.querySelector('ul').append(li);
+        // })
+        renderList(res);
+    }).catch(err=>{
+        console.log(err);
+    })
 
+    function renderList(res){
+        document.querySelector('.title').innerHTML=res.title;
+        document.querySelector('h4').innerHTML=res.updated;
+        let events = res.entry;
+        let str='';
+        events.forEach(function(e,k){
+            str+= `<li>${e.title}</li>`;
+        })
+            document.querySelector('ul').innerHTML=str;
+    }
   </script>
